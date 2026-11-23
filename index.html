@@ -250,6 +250,70 @@ a.tile:hover .v{color:var(--accent)}
   .form,.fields{grid-template-columns:1fr}
   .toolbar input{width:100%}
 }
+/* site cart + reco */
+.cw{position:relative;align-self:start}
+.addc{position:absolute;right:8px;top:8px;z-index:2;border:1px solid var(--line);background:color-mix(in srgb,var(--surface) 92%,transparent);border-radius:999px;padding:3px 11px;font-size:12px;font-weight:700;cursor:pointer}
+.addc:hover{border-color:var(--ink)}
+.addc.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.addc.ext{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ph3{font-size:15px;font-weight:700}
+.wstat{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--mute);margin-top:8px}
+.wstat b{font-family:var(--font-mono);color:var(--ink);font-size:18px;margin-left:5px}
+.wsum{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:3px;margin-top:12px}
+.wsum button{border:0;padding:0;aspect-ratio:4/5;overflow:hidden;background:var(--line);cursor:pointer}
+.wsum img{width:100%;height:100%;object-fit:cover}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px 14px}
+.pick{border:0;background:none;text-align:left;cursor:pointer;padding:0;align-self:start;display:block}
+.pick .ph{aspect-ratio:4/5}
+.pick .k{font-size:12px;color:var(--mute);font-weight:600;margin-top:8px}
+.pick .n{font-size:13.5px;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pick .mono{font-size:13px}
+.tier{font-weight:700}
+.tier.buy,.score.buy{color:var(--good)} .tier.hold,.score.hold{color:var(--accent)} .tier.skip,.score.skip{color:var(--warn)}
+.rcat{margin-top:56px}
+.rcat>h2{display:flex;gap:10px;align-items:baseline;margin-bottom:6px}
+.rcat>h2 small{font-size:13px;color:var(--mute);font-weight:500}
+.advice{font-size:13.5px;color:var(--mute);margin-bottom:6px}
+.advice b{color:var(--ink)}
+.rc{display:grid;grid-template-columns:230px 1fr;gap:26px;padding:24px 0;border-top:1px solid var(--line)}
+.rph{border:0;padding:0;cursor:pointer;display:block;width:100%;align-self:start}
+.rank{position:absolute;left:8px;top:8px;z-index:1;font-family:var(--font-mono);font-weight:700;background:var(--ink);color:var(--bg);padding:2px 8px;border-radius:2px;font-size:12px}
+.rtop{display:flex;align-items:center;gap:12px}
+.score{font-family:var(--font-mono);font-size:20px;font-weight:700;width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;border:2px solid currentColor}
+.rc .b{font-size:13px;color:var(--mute);font-weight:600}
+.rc h3{font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.3;cursor:pointer;margin-top:10px}
+.rc .pr{font-size:17px;font-weight:600;margin-top:4px}
+.rc .pr em{font-style:normal;color:var(--warn);font-size:13px}
+.why{list-style:none;margin:12px 0;display:grid;gap:4px;font-size:13.5px}
+.why li{padding-left:16px;position:relative}
+.why li:before{content:'';position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.why li.good:before{background:var(--good)} .why li.warn:before{background:var(--warn)}
+.rc .k,.szbox .k{font-size:12.5px;color:var(--mute);font-weight:600;margin:10px 0 6px}
+.rc .thumbs{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end}
+.rc .thumbs button{width:70px;border:0;padding:0;cursor:pointer;background:none;text-align:left}
+.rc .thumbs button i{display:block;aspect-ratio:4/5;border-radius:2px;overflow:hidden;background:var(--line)}
+.rc .thumbs img{width:100%;height:100%;object-fit:cover}
+.rc .thumbs b{display:block;font-size:10.5px;font-weight:600;margin-top:3px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc .thumbs .sub{font-size:12px;color:var(--mute)}
+.szbox{border:1px solid var(--line);background:var(--surface);border-left:4px solid var(--accent);padding:4px 14px 12px;margin:14px 0;font-size:13.5px}
+.szbox .k{margin:8px 0 0}
+.szbox .v{font-family:var(--font-mono);font-size:20px;font-weight:700}
+.szbox .sub{color:var(--mute);font-size:12.5px;margin-top:4px}
+.szbar{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.szbar span{font-family:var(--font-mono);font-size:11.5px;border:1px solid var(--line);padding:3px 8px;border-radius:2px;display:flex;gap:6px}
+.szbar span b{font-weight:500;color:var(--mute)}
+.szbar span.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.szbar span.on b{color:inherit;opacity:.75}
+.szbar span.me{border-style:dashed;color:var(--accent);border-color:var(--accent)}
+.szsel{border:1px solid var(--line);background:var(--surface);border-radius:2px;padding:9px 10px;font-size:14px}
+.szsel.qty{width:58px;padding:5px 6px}
+.cmp .meta .szsel{padding:5px 8px;font-size:13px}
+.btn.sm{padding:5px 10px;font-size:12.5px}
+details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 0;color:var(--mute);border-top:1px solid var(--line)}
+.cartsum{display:flex;gap:28px;flex-wrap:wrap;align-items:center;margin-bottom:34px}
+.cartsum .k{font-size:12.5px;color:var(--mute);font-weight:600}
+.cartsum .v{font-family:var(--font-mono);font-size:24px;font-weight:700}
+@media (max-width:640px){.rc{grid-template-columns:120px 1fr;gap:14px}.rc h3{font-size:16px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -261,7 +325,8 @@ a.tile:hover .v{color:var(--accent)}
       <a href="#home" data-v="home">홈</a>
       <a href="#closet" data-v="closet">내 옷장 <span id="n-closet">0</span></a>
       <a href="#likes" data-v="likes">좋아요 <span id="n-likes">0</span></a>
-      <a href="#cart" data-v="cart">장바구니 비교 <span id="n-cart">0</span></a>
+      <a href="#reco" data-v="reco">뭘 살까</a>
+      <a href="#cart" data-v="cart">장바구니 <span id="n-cart">0</span></a>
       <a href="#looks" data-v="looks">코디 <span id="n-looks">0</span></a>
     </nav>
     <div class="sync">데이터<b id="lastSync">—</b></div>
@@ -314,10 +379,19 @@ a.tile:hover .v{color:var(--accent)}
       <div class="grid" id="likeGrid"></div>
     </section>
 
+    <!-- RECO -->
+    <section class="view" id="v-reco">
+      <div class="head"><div><h1>겨울 옷장 기준,<br><em>뭘 살까.</em></h1><p class="lead">지금 가진 겨울 옷과 좋아요한 옷을 맞춰 봤어요. 옷장에 없는 종류일수록, 내 옷과 색이 잘 맞을수록 점수가 올라가요. 사이즈는 평소 입는 사이즈를 기준으로, 같은 종류 내 옷의 총장과 비교해 알려 줘요.</p></div></div>
+      <div id="recoWinter"></div>
+      <div class="sec" style="margin-top:44px"><h2>카테고리별 1순위</h2><div class="picks" id="recoPicks"></div></div>
+      <div class="toolbar" id="recoChips" style="margin-top:48px;margin-bottom:0"></div>
+      <div id="recoList"></div>
+    </section>
+
     <!-- CART -->
     <section class="view" id="v-cart">
       <div class="head">
-        <div><h1>장바구니 비교</h1><p class="lead">담아 둔 상품마다 이미 비슷한 옷이 있는지, 같이 입을 옷이 있는지, 좋아요 중 대안이 있는지 확인해요.</p></div>
+        <div><h1>장바구니</h1><p class="lead">무신사 장바구니와 이 사이트에서 담은 상품을 같이 보여줘요. 담아 둔 상품마다 이미 비슷한 옷이 있는지, 같이 입을 옷이 있는지, 좋아요 중 대안이 있는지 확인해요.</p></div>
       </div>
       <div id="cartList"></div>
     </section>
@@ -392,14 +466,14 @@ const FAM=[['블랙','black'],['차콜','charcoal','챠콜'],['그레이','grey'
 const fam=c=>{c=(c||'').toLowerCase();const f=FAM.find(f=>f.some(w=>c.includes(w)));return f?f[0]:null};
 
 /* ---------------- routing ---------------- */
-const VIEWS=['home','closet','likes','cart','looks'];
+const VIEWS=['home','closet','likes','reco','cart','looks'];
 function route(){const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):'home';
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('on',el.id==='v-'+v));
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));window.scrollTo(0,0)}
 addEventListener('hashchange',route);route();
 
 /* ---------------- render ---------------- */
-function renderAll(){renderCounts();renderHome();renderCloset();renderLikes();renderCart();renderLooks()}
+function renderAll(){renderCounts();renderHome();renderCloset();renderLikes();renderReco();renderCart();renderLooks()}
 function renderCounts(){
   $('#n-closet').textContent=closet().length;$('#n-likes').textContent=likes().length;
   $('#n-cart').textContent=cart().length;$('#n-looks').textContent=Object.keys(S.looks).length;
@@ -436,7 +510,7 @@ function renderCloset(){
    :`<div class="panel" style="grid-column:1/-1"><b>아직 옷장이 비어 있어요.</b><p class="empty-note" style="margin-top:4px">자주 입는 옷부터 사진으로 올려 보세요. 좋아요 상품 중 이미 산 게 있다면 상품을 열어 "샀어요"를 누르면 바로 옮겨져요. 옷장이 채워지면 장바구니 비교에 "이미 비슷한 옷 있음"과 "같이 입을 옷" 개수가 나와요.</p></div>`;
 }
 let likeCat='전체';
-function card(p){const d=lastDrop(p);const a=pImg(p,1);const tip=p.c1!=='속옷/홈웨어'?shortTip(p):'';return `<button class="card" onclick="openP('${esc(p._id)}')"><div class="ph">${ph(pImg(p),p.brand)}${a?`<img class="alt" loading="lazy" src="${a}" alt="">`:''}<div class="tags">${p.dc?`<span class="tg dc">${p.dc}%</span>`:''}${d?`<span class="tg drop">↓${won(d.from-d.to)}</span>`:''}${p.cart?'<span class="tg cart">장바구니</span>':''}${p.bought?'<span class="tg">구매함</span>':''}</div><span class="sub">${esc(p.c2)}</span></div><div class="b">${esc(p.brand)}</div><div class="n">${esc(p.name)}</div><div class="p">${won(p.price)}${p.normal>p.price?`<s>${won(p.normal)}</s>`:''}</div>${productSpecSummary(p)}${tip?`<div class="tip1">${esc(tip)}</div>`:''}</button>`}
+function card(p){const d=lastDrop(p);const a=pImg(p,1);const tip=p.c1!=='속옷/홈웨어'?shortTip(p):'';return `<div class="cw"><button class="card" onclick="openP('${esc(p._id)}')"><div class="ph">${ph(pImg(p),p.brand)}${a?`<img class="alt" loading="lazy" src="${a}" alt="">`:''}<div class="tags">${p.dc?`<span class="tg dc">${p.dc}%</span>`:''}${d?`<span class="tg drop">↓${won(d.from-d.to)}</span>`:''}${p.cart?'<span class="tg cart">장바구니</span>':''}${p.bought?'<span class="tg">구매함</span>':''}</div><span class="sub">${esc(p.c2)}</span></div><div class="b">${esc(p.brand)}</div><div class="n">${esc(p.name)}</div><div class="p">${won(p.price)}${p.normal>p.price?`<s>${won(p.normal)}</s>`:''}</div>${productSpecSummary(p)}${tip?`<div class="tip1">${esc(tip)}</div>`:''}</button>${p.c1!=='속옷/홈웨어'?`<button class="addc ${p._mcart?'ext':p.cart?'on':''}" onclick="toggleCart('${esc(p._id)}')">${p._mcart?'무신사 담김':p.cart?'✓ 담김':'+ 담기'}</button>`:''}</div>`}
 const shortTip=p=>(p.tip||TIP_C2[p.c2]||'').split(/(?<=[.요])\s/)[0];
 function productSpecSummary(p){
   const values=[['소재',p.material],['길이',p.measure]];
@@ -474,9 +548,9 @@ function analyze(p){
 const thumbBtns=(arr,fn,n=7)=>`<div class="thumbs">${arr.slice(0,n).map(x=>{const s=x.imgs?pImg(x):cImg(x);return `<button onclick="${fn}('${esc(x._id)}')" title="${esc((x.brand||'')+' '+x.name)}"><i>${s?`<img loading="lazy" src="${s}" alt="">`:''}</i><b>${x.price?won(x.price):esc(x.c2||'')}</b></button>`}).join('')}${arr.length>n?`<span class="sub">+${arr.length-n}</span>`:''}</div>`;
 function renderCart(){
   const C=cart();
-  if(!C.length){$('#cartList').innerHTML=`<div class="panel"><p class="empty-note">${S.loaded?'장바구니 상품이 없어요. 엑셀 \'좋아요·장바구니\' 시트에서 장바구니옵션 칸을 채우면 여기에 나와요.':'불러오는 중…'}</p></div>`;return}
+  if(!C.length){$('#cartList').innerHTML=`<div class="panel"><p class="empty-note">${S.loaded?'장바구니가 비어 있어요. 좋아요나 뭘 살까 탭에서 + 담기를 누르면 여기에 모여요.':'불러오는 중…'}</p></div>`;return}
   const hasCloset=closet().length>0;
-  $('#cartList').innerHTML=C.map(p=>{const a=analyze(p);const d=lastDrop(p);
+  $('#cartList').innerHTML=cartSummary(C)+C.map(p=>{const a=analyze(p);const d=lastDrop(p);
    const end=p.cart.saleEnd?Math.ceil((new Date(p.cart.saleEnd)-new Date())/864e5):null;
    const v=p.verdict;
    return `<article class="cmp">
@@ -484,8 +558,8 @@ function renderCart(){
     <div>
      <div class="meta">${esc(p.brand)} · ${esc(p.c1)} &gt; ${esc(p.c2)}</div>
      <h3>${esc(p.name)}</h3>
-     <div class="meta">옵션 <span class="mono">${esc(p.cart.opt||'-')}</span> · ${p.cart.qty||1}개${end!=null&&end>=0?` · <b style="color:var(--warn)">특가 종료 D-${end}</b>`:''}</div>
-     <dl class="product-specs">${productSpecs(p)}</dl>
+     <div class="meta">${cartMeta(p)}${end!=null&&end>=0?` · <b style="color:var(--warn)">특가 종료 D-${end}</b>`:''}</div>
+     <dl class="product-specs">${productSpecs(p)}</dl>${p.c1!=='속옷/홈웨어'?sizeBox(sizeReco(p)):''}
      <div class="price"><em>${p.dc}%</em>${won(p.price)}<s>${won(p.normal)}</s>${d?` <span class="pill good">지난번보다 ${won(d.from-d.to)} 내림</span>`:''}</div>
      ${p.tip?`<div class="tip"><b>MEMO</b><p>${esc(p.tip)}</p></div>`:''}
      <div class="checks">
@@ -523,7 +597,7 @@ function swapImg(b,s){$('#mImg').src=s;b.parentNode.querySelectorAll('button').f
 function spark(h){if(!h||h.length<2)return '';const w=260,H=46,ps=h.map(x=>x.p),mn=Math.min(...ps),mx=Math.max(...ps),r=mx-mn||1;
   const pts=h.map((x,i)=>[i/(h.length-1)*w,H-6-(x.p-mn)/r*(H-12)]);
   return `<div class="spark"><div class="k">가격 기록 (${esc(h[0].d)} → ${esc(h[h.length-1].d)})</div><svg width="${w}" height="${H}" viewBox="0 0 ${w} ${H}" role="img" aria-label="가격 기록"><polyline fill="none" stroke="var(--accent)" stroke-width="2" points="${pts.map(p=>p.join(',')).join(' ')}"/>${pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="${i===pts.length-1?3.5:2}" fill="var(--accent)"/>`).join('')}</svg><div class="k mono">최저 ${won(mn)} · 최고 ${won(mx)}</div></div>`}
-function openP(id){const p=S.products[id];if(!p)return;
+function openP(id){const p=S.products[id];if(!p)return;_openP=id;
   const srcs=(p.imgs||[]).map((k,i)=>pImg(p,i)).filter(Boolean);
   const tip=[p.tip,TIP_C2[p.c2]].filter(Boolean);
   sheet.innerHTML=`<button class="x" onclick="closeM()" aria-label="닫기">×</button>${gallery(srcs)}
@@ -535,6 +609,7 @@ function openP(id){const p=S.products[id];if(!p)return;
   ${p.cart?`<dt>장바구니</dt><dd>${esc(p.cart.opt||'')} · ${p.cart.qty||1}개</dd>`:''}</dl>
   ${tip.length?`<div class="tip"><b>COORDI TIP</b>${tip.map(t=>`<p>${esc(t)}</p>`).join('')}</div>`:''}
   ${spark(p.hist)}
+  ${p.c1!=='속옷/홈웨어'?(z=>sizeBox(z)+`<div class="row" style="margin-top:12px">${cartCtl(p,z,'m')}</div>`)(sizeReco(p)):''}
   <div class="row" style="margin-top:18px">${(p.url||p.no)?`<a class="btn" href="${esc(p.url||('https://www.musinsa.com/products/'+p.no))}" target="_blank" rel="noopener">${esc(shopName(p.url||'musinsa'))}에서 보기</a>`:''}
   ${p.bought?'<span class="status">옷장에 있어요</span>':''}</div></div>`;
   modal.classList.add('on');document.body.style.overflow='hidden'}
@@ -549,7 +624,7 @@ function closetMeasurements(c){
   const source=c.measureUrl ? `<dt>실측 출처</dt><dd><a href="${esc(c.measureUrl)}" target="_blank" rel="noopener">상품 상세</a></dd>` : '';
   return rows+source;
 }
-function openC(id){const c=S.closet[id];if(!c)return;
+function openC(id){const c=S.closet[id];if(!c)return;_openP=null;
   sheet.innerHTML=`<button class="x" onclick="closeM()" aria-label="닫기">×</button>${gallery(cImgs(c))}
   <div class="info"><div class="b">내 옷장 · ${esc(c.c1)} &gt; ${esc(c.c2||'')}</div><h3>${esc(c.name)}</h3>
   <dl>${c.brand?`<dt>브랜드</dt><dd>${esc(c.brand)}</dd>`:''}${c.color?`<dt>색</dt><dd>${esc(c.color)}</dd>`:''}${c.size?`<dt>구매 사이즈</dt><dd>${esc(c.size)}</dd>`:''}${closetMeasurements(c)}<dt>실결제가</dt><dd>${c.price?Number(c.price).toLocaleString()+'원':'<span style="color:var(--mute)">미입력</span>'}${c.normal?` <span style="color:var(--mute)">(정가 ${Number(c.normal).toLocaleString()}원)</span>`:''}</dd>${c.shop||c.boughtAt?`<dt>구매</dt><dd>${esc([c.shop,c.boughtAt].filter(Boolean).join(' · '))}</dd>`:''}${c.material?`<dt>소재</dt><dd>${esc(c.material)}</dd>`:''}${c.season?`<dt>계절</dt><dd>${esc(c.season)}</dd>`:''}${c.memo?`<dt>메모</dt><dd>${esc(c.memo)}</dd>`:''}<dt>ID</dt><dd class="mono">${esc(c._id)}</dd></dl>
@@ -598,7 +673,7 @@ function applyData(d,label){
   const drops=Object.values(d.products).map(p=>{const x=lastDrop(p);return x?{id:p._id,...x}:null}).filter(Boolean);
   S.meta={lastSync:label,changes:{added:Object.values(d.products).filter(p=>p.cart).map(p=>p._id),removed:Object.values(d.products).filter(p=>p.bought).map(p=>p._id),drops}};
   SRC=`${label} · 옷 ${Object.keys(d.closet).length}벌 · 상품 ${Object.keys(d.products).length}개 · 코디 ${Object.keys(d.looks).length}개`;
-  S.loaded=true;renderAll();
+  syncCart();S.loaded=true;renderAll();
 }
 function readBuffer(buf,label,cache){
   const wb=XLSX.read(buf,{type:'array'});const d=fromWorkbook(wb);
@@ -617,6 +692,171 @@ const drop=$('#drop');
 ['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove('over')}));
 drop.addEventListener('drop',e=>{const f=[...e.dataTransfer.files].find(f=>/\.xlsx$/i.test(f.name));if(f)loadFile(f)});
 function banner(html){const b=$('#banner');b.innerHTML=html;b.classList.add('on')}
+
+/* ---------------- 겨울 매칭 · 사이즈 추천 · 사이트 장바구니 ---------------- */
+const SITE_CART_KEY='wardrobe-sitecart-v1';
+let siteCart={};try{siteCart=JSON.parse(localStorage.getItem(SITE_CART_KEY)||'{}')||{}}catch(e){siteCart={}}
+function saveSiteCart(){try{localStorage.setItem(SITE_CART_KEY,JSON.stringify(siteCart))}catch(e){}}
+function syncCart(){Object.values(S.products).forEach(p=>{if(!('_mcart' in p))p._mcart=p.cart||null;const s=siteCart[p._id];p.cart=p._mcart||(s?{opt:s.opt||'',qty:s.qty||1,addedAt:s.at||'',saleEnd:'',site:true}:null)})}
+const todayStr=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+let _openP=null;
+function refreshAfterCart(id){syncCart();renderAll();if(modal.classList.contains('on')&&_openP===id)openP(id)}
+function addCart(id,opt){const p=S.products[id];if(!p)return;if(p._mcart){toast('이미 무신사 장바구니에 있는 상품이에요');return}
+  if(opt==null)opt=sizeReco(p).label||'';
+  siteCart[id]={opt,qty:siteCart[id]?.qty||1,at:siteCart[id]?.at||todayStr()};saveSiteCart();refreshAfterCart(id);toast('장바구니에 담았어요'+(opt?' · '+opt:''))}
+function removeCart(id){if(!siteCart[id])return;delete siteCart[id];saveSiteCart();refreshAfterCart(id);toast('장바구니에서 뺐어요')}
+function toggleCart(id){const p=S.products[id];if(!p)return;if(p._mcart){toast('무신사 장바구니에 있는 상품이에요');return}siteCart[id]?removeCart(id):addCart(id)}
+function setCartOpt(id,opt){if(!siteCart[id])return;siteCart[id].opt=opt;saveSiteCart();syncCart();renderCounts();renderHome();renderLikes();renderReco();toast('사이즈를 '+(opt||'미정')+'(으)로 바꿨어요')}
+function setCartQty(id,q){if(!siteCart[id])return;siteCart[id].qty=Math.max(1,Math.min(9,q|0||1));saveSiteCart();syncCart();renderAll()}
+
+/* 종류 묶음 */
+const GROUPS=[['코트',/코트/],['패딩',/패딩|헤비|돕바/],['플리스',/플리스|뽀글/],['니트',/니트|스웨터/],['카디건',/카디건/],['사파리·필드',/사파리|헌팅|필드/],['블루종',/블루종|MA-1|코치|나일론/],['레더·무스탕',/레더|라이더스|무스탕|퍼/],['후드·맨투맨',/후드|맨투맨|스웨트/],['재킷',/재킷|트러커|블레이저|과잠|바람막이|베스트/],['긴소매',/긴소매/],['반소매',/반소매|피케/],['셔츠',/셔츠\/블라우스|^셔츠/],['코튼 팬츠',/코튼|치노|기타 하의/],['슬랙스',/슬랙스|슈트 팬츠/],['데님',/데님/],['트레이닝',/트레이닝|조거|파라슈트|와이드/],['숏 팬츠',/숏 팬츠/],['스니커즈',/스니커즈|스포츠화/],['구두',/구두|로퍼|부츠/],['가방',/백|가방/],['머플러',/머플러|목도리/],['모자',/캡|모자|비니/]];
+function groupOf(x){const s=x.c2||'';if(x.c1==='아우터'&&/후드 집업/.test(s))return '후드 집업';for(const [g,r] of GROUPS)if(r.test(s))return g;return s||x.c1}
+const WINTER_G=['코트','패딩','플리스','니트','카디건','사파리·필드','블루종','레더·무스탕','후드·맨투맨','후드 집업','재킷','셔츠','긴소매'];
+function isWinterOwn(c){const s=c.season||'',g=groupOf(c);
+  if(/겨울|사계절/.test(s))return g!=='반소매'&&g!=='숏 팬츠';
+  if(s)return /가을/.test(s)&&c.c1==='상의'&&g!=='반소매';
+  if(c.c1==='바지')return g!=='숏 팬츠';
+  if(c.c1==='신발'||c.c1==='가방')return true;
+  if(c.c1==='소품')return ['머플러','모자'].includes(g);
+  return WINTER_G.includes(g)&&!/바람막이/.test(c.c2||'')}
+const isWinterProd=p=>!/반소매|숏 팬츠|샌들|슬리퍼/.test(p.c2||'');
+const winterCloset=()=>closet().filter(isWinterOwn);
+
+/* 색 궁합 */
+const NEU=['블랙','차콜','그레이','화이트'];
+const GOOD={네이비:['베이지','브라운','카키','블루','그레이','화이트','차콜'],브라운:['베이지','카키','네이비','블루','화이트','블랙'],카키:['베이지','브라운','블랙','네이비','블루','화이트'],베이지:['네이비','브라운','카키','블랙','블루','차콜'],블루:['네이비','브라운','카키','베이지','블랙','화이트','그레이','차콜'],버건디:['그레이','네이비','블랙','베이지','차콜']};
+function compat(a,b){if(!a||!b)return 1;if(NEU.includes(a)||NEU.includes(b))return (a===b&&a!=='블랙')?1:2;if(a===b)return 1;return ((GOOD[a]||[]).includes(b)||(GOOD[b]||[]).includes(a))?2:0}
+const cFam=c=>fam(c.color)||fam(c.name);
+
+function matchProduct(p,W){
+  const cats=PAIR[p.c1]||[];const pool=W.filter(c=>cats.includes(c.c1));
+  const opts=[...new Set(String(p.color||'').split(/[,/]/).map(fam).filter(Boolean))];
+  if(!opts.length){const f=fam(p.name);if(f)opts.push(f)}
+  const ev=(opts.length?opts:[null]).map(f=>{const sc=pool.map(c=>({c,s:compat(f,cFam(c))}));return {f,sc,good:sc.filter(x=>x.s>=2).length,bad:sc.filter(x=>x.s===0).length}}).sort((a,b)=>b.good-a.good||a.bad-b.bad);
+  const best=ev[0];const g=groupOf(p);
+  const same=W.filter(c=>groupOf(c)===g);
+  const dup=same.filter(c=>{const f=cFam(c);return f&&best.f&&f===best.f});
+  const srt=best.sc.filter(x=>x.s>=1).sort((a,b)=>b.s-a.s||(cImg(b.c)?1:0)-(cImg(a.c)?1:0));
+  const buckets=ORDER.map(k=>srt.filter(x=>x.c.c1===k)).filter(b=>b.length);const pairs=[];
+  for(let i=0;pairs.length<srt.length;i++)buckets.forEach(b=>{if(b[i])pairs.push(b[i])});
+  let s=50;const R=[];const n=same.length;const gf=!isWinterProd(p)?0:['소품','가방'].includes(p.c1)?.5:1;
+  if(n===0){s+=22*gf;R.push({t:'good',m:`겨울 옷장에 ${g} 종류가 아직 없어요 — 새 조합이 생겨요`})}
+  else if(n===1){s+=12*gf;R.push({t:'good',m:`${g} 종류는 1벌뿐이라 번갈아 입기 좋아요`})}
+  else if(n===2){s+=3;R.push({t:'note',m:`${g} 종류 이미 2벌 있어요`})}
+  else{s-=8+(n-3)*3;R.push({t:'warn',m:`${g} 종류가 이미 ${n}벌 있어요`})}
+  const unk=best.sc.length-best.good-best.bad;const vers=best.good+.5*unk;s+=Math.min(vers,14)*1.5;
+  if(pool.length){const byC={};best.sc.filter(x=>x.s>=2).forEach(x=>byC[x.c.c1]=(byC[x.c.c1]||0)+1);
+    const tx=Object.entries(byC).map(([k,v])=>k+' '+v).join(' · ');
+    R.push({t:best.good>=6?'good':best.good>=3?'note':'warn',m:best.good?`색이 잘 맞는 내 겨울 옷 ${best.good}벌 (${tx})`:`색 궁합이 확실한 내 겨울 옷이 적어요`})}
+  if(best.bad>=3){s-=4;R.push({t:'warn',m:`색이 부딪히는 내 옷 ${best.bad}벌`})}
+  if(dup.length){s-=10;R.push({t:'warn',m:`같은 색 ${g} 있음: ${dup[0].name}`})}
+  if(opts.length>1&&best.f)R.push({t:'note',m:`색은 ${best.f} 추천 — 내 옷과 가장 잘 맞아요`});
+  if(lastDrop(p)){s+=4;R.push({t:'good',m:'최근 가격이 내렸어요'})}
+  if(p.dc>=40)s+=3;
+  if(!isWinterProd(p)){s-=25;R.push({t:'warn',m:'겨울에 입기엔 가벼운 옷이에요'})}
+  if(p.price>=200000)s-=4;
+  if(p.verdict?.v==='skip')s-=10;if(p.verdict?.v==='buy')s+=5;
+  return {score:Math.max(0,Math.min(100,Math.round(s))),reasons:R,pairs:pairs.map(x=>x.c),color:best.f,group:g,same}
+}
+
+/* 사이즈 추천 */
+function parseSizes(m){m=T(m);if(!m)return [];const h=m.match(/^총장\(cm\)\s*(.+)$/);
+  if(h)return h[1].split('·').map(x=>{const y=x.trim().match(/^(.+?)\s+([\d.]+)$/);return y?{label:y[1].trim(),len:+y[2]}:null}).filter(Boolean);
+  const pre=m.split('/')[0];if(/mm|cm|×/.test(pre))return [];
+  return pre.split('·').map(x=>({label:x.trim(),len:null})).filter(x=>x.label)}
+function letterSize(v){const s=String(v||'').toUpperCase().replace(/MEDIUM/g,'M').replace(/LARGE/g,'L').replace(/SMALL/g,'S');
+  const m=s.match(/(?:^|[^A-Z0-9])(3XL|2XL|XXL|XL|XS|S|M|L)(?![A-Z0-9])/);if(m)return m[1]==='XXL'?'2XL':m[1];
+  const n=s.match(/(?:^|\D)(0?9[05]|100|105|110)(?!\d)/);return n?({'90':'S','95':'M','100':'L','105':'XL','110':'2XL'}[String(+n[1])]||null):null}
+function ownLen(c){for(const l of c.measurements||[]){const x=l.match(/^앞?총장(?:\(일반\))?\s+([\d.]+)\s*cm/);if(x)return +x[1]}return null}
+const median=a=>{const s=[...a].sort((x,y)=>x-y),n=s.length;return n?(n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2):null};
+function usualSize(c1){const cnt={};closet().filter(c=>c.c1===c1).forEach(c=>{const l=letterSize(c.size);if(l)cnt[l]=(cnt[l]||0)+1});const list=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);return {top:list[0]?.[0]||null,list,total:list.reduce((a,x)=>a+x[1],0)}}
+const LET=['XS','S','M','L','XL','2XL','3XL'];
+function sizeReco(p){
+  const sizes=parseSizes(p.measure);
+  if(p.c1==='신발'){const ns=closet().filter(c=>c.c1==='신발').map(c=>parseInt(c.size,10)).filter(n=>n>=200&&n<=320);
+    if(!ns.length)return {label:'',text:'내 신발 사이즈 정보가 없어요.'};
+    const cnt={};ns.forEach(n=>cnt[n]=(cnt[n]||0)+1);const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]||a[0]-b[0])[0];
+    return {label:top[0],text:`내 신발 ${ns.length}켤레 중 ${top[1]}켤레가 ${top[0]}이라 ${top[0]}부터 보세요.`,detail:Object.entries(cnt).map(([k,v])=>`${k} ${v}켤레`).join(' · ')}}
+  if(!['아우터','상의','바지'].includes(p.c1)){const one=sizes[0]?.label||(/(^|\s)(F|FREE|OS)(\s|$)/i.test(p.measure||'')?'FREE':'');return {label:one,text:'원사이즈라 사이즈 고를 필요가 없어요.'}}
+  const us=usualSize(p.c1);const detail=us.total?`내 ${p.c1} 사이즈: ${us.list.slice(0,4).map(([k,v])=>`${k} ${v}벌`).join(' · ')}`:'';
+  const withLen=sizes.filter(x=>x.len);const g=groupOf(p);const crop=/크롭|crop/i.test(p.name);
+  let target=null,pool=[],sameKind=false;
+  if(withLen.length){const mid=median(withLen.map(x=>x.len));
+    const refs=closet().filter(c=>c.c1===p.c1).map(c=>({c,len:ownLen(c)})).filter(r=>r.len);
+    const same=refs.filter(r=>groupOf(r.c)===g&&Math.abs(r.len-mid)<=15);
+    pool=same.length?same:refs.filter(r=>Math.abs(r.len-mid)<=12);sameKind=!!same.length;
+    if(pool.length)target=median(pool.map(r=>r.len))}
+  const refTxt=target!=null?`${sameKind?'같은 종류':'길이가 비슷한'} 내 옷 ${pool.length}벌(총장 중간값 ${target}cm)`:'';
+  const cmpTxt=len=>{const d=+(len-target).toFixed(1);return Math.abs(d)<=2?'길이가 거의 같아요':d>0?`${d}cm 길어요`:`${-d}cm 짧아요`};
+  const refShort=target!=null?`${sameKind?'같은 종류':'길이가 비슷한'} 내 옷 ${pool.length}벌의 총장(중간값 ${target}cm)`:'';
+  let pick=null;
+  if(us.top){pick=sizes.find(x=>letterSize(x.label)===us.top)||null;
+    if(!pick){const idx=LET.indexOf(us.top);const c=sizes.map(x=>({x,i:LET.indexOf(letterSize(x.label))})).filter(o=>o.i>=0);
+      if(c.length)pick=c.reduce((a,o)=>Math.abs(o.i-idx)<Math.abs(a.i-idx)?o:a).x}}
+  const byLen=target!=null&&withLen.length?withLen.reduce((a,x)=>Math.abs(x.len-target)<Math.abs(a.len-target)?x:a):null;
+  const base={sizes:withLen,target,detail};
+  if(pick){let text=`평소 ${p.c1} 사이즈(${us.top}) 기준으로 ${pick.label}.`;let note='';
+    if(pick.len&&target!=null){text+=` 총장 ${pick.len}cm — ${refShort}과 비교하면 ${cmpTxt(pick.len)}.`;
+      if(crop)note='크롭 기장 상품이라 짧게 나오는 게 정상이에요.';
+      else if(byLen&&byLen.label!==pick.label&&Math.abs(pick.len-target)>=4)note=`기장을 내 옷과 맞추고 싶으면 ${byLen.label}(${byLen.len}cm)이에요. 원하는 핏에 따라 골라 보세요.`;}
+    else if(!pick.len)text+=' 사이즈별 길이 정보는 없어요.';
+    if(!note&&(p.attrs||[]).some(a=>/루즈|오버/.test(a)))note='루즈핏 상품이라 품은 넉넉하게 나와요.';
+    return {...base,label:pick.label,text,note}}
+  if(byLen){const d=+(byLen.len-target).toFixed(1);
+    return {...base,label:byLen.label,text:`브랜드 자체 사이즈라 길이로 골랐어요. ${refShort}에 가장 가까운 ${byLen.label}(총장 ${byLen.len}cm, ${d>0?'+':''}${d}cm).`,note:crop?'크롭 기장 상품이라 짧게 나오는 게 정상이에요.':((p.attrs||[]).some(a=>/루즈|오버/.test(a))?'루즈핏 상품이라 품은 넉넉하게 나와요.':'')}}
+  return {...base,label:'',text:withLen.length?`총장 ${median(withLen.map(x=>x.len))}cm 안팎의 내 옷이 없어 비교가 어려워요.`:'사이즈별 길이 정보가 없어 비교가 어려워요.'}
+}
+function sizeOptions(p,z){let o=parseSizes(p.measure).map(x=>x.label);const r=String(p.measure||'').match(/(\d{3})\s*[–-]\s*(\d{3})\s*mm/);
+  if(!o.length&&r)for(let n=+r[1];n<=+r[2];n+=5)o.push(String(n));
+  if(z.label&&!o.includes(z.label))o.unshift(z.label);return [...new Set(o)]}
+function sizeSelect(p,z,pre,cur,on){const o=sizeOptions(p,z);const sel=cur??z.label;
+  return `<select class="szsel" id="${pre}-${esc(p._id)}" ${on?`onchange="${on}"`:''} aria-label="사이즈">${o.length?'':'<option value="">사이즈 미정</option>'}${o.map(x=>`<option value="${esc(x)}" ${x===sel?'selected':''}>${esc(x)}${x===z.label?' · 추천':''}</option>`).join('')}</select>`}
+function sizeBox(z){if(!z)return '';
+  return `<div class="szbox"><div class="k">사이즈 추천</div><div class="v">${z.label?esc(z.label):'—'}</div><p>${esc(z.text)}</p>${z.sizes?.length?`<div class="szbar">${z.sizes.map(x=>`<span class="${x.label===z.label?'on':''}">${esc(x.label)}<b>${x.len}</b></span>`).join('')}${z.target?`<span class="me">내 옷<b>${z.target}</b></span>`:''}</div>`:''}${z.note?`<p class="sub">${esc(z.note)}</p>`:''}${z.detail?`<p class="sub">${esc(z.detail)}</p>`:''}</div>`}
+function cartCtl(p,z,pre){const id=esc(p._id);
+  if(p._mcart)return `<span class="status">무신사 장바구니에 있어요${p._mcart.opt?' · '+esc(p._mcart.opt):''}</span>`;
+  if(siteCart[p._id])return `<span class="status">장바구니에 담김 · ${esc(siteCart[p._id].opt||'사이즈 미정')}</span><button class="btn ghost" onclick="removeCart('${id}')">빼기</button>`;
+  return `${sizeSelect(p,z,pre)}<button class="btn acc" onclick="addCart('${id}',document.getElementById('${pre}-${id}').value)">장바구니 담기</button>`}
+function cartMeta(p){if(!p.cart.site)return `<span class="tg">무신사 장바구니</span> 옵션 <span class="mono">${esc(p.cart.opt||'-')}</span> · ${p.cart.qty||1}개`;
+  const id=esc(p._id);return `<span class="tg cart">사이트 장바구니</span> 사이즈 ${sizeSelect(p,sizeReco(p),'c',p.cart.opt,`setCartOpt('${id}',this.value)`)} 수량 <input class="szsel qty" type="number" min="1" max="9" value="${p.cart.qty||1}" onchange="setCartQty('${id}',+this.value)" aria-label="수량"> <button class="btn ghost sm" onclick="removeCart('${id}')">빼기</button>`}
+function cartSummary(C){const sum=C.reduce((a,p)=>a+p.price*(p.cart.qty||1),0),site=C.filter(p=>p.cart.site).length;
+  return `<div class="panel cartsum"><div><div class="k">담은 상품</div><div class="v">${C.length}개</div></div><div><div class="k">합계</div><div class="v">${won(sum)}</div></div><div class="empty-note">무신사 장바구니 ${C.length-site}개 · 사이트에서 담은 것 ${site}개<br>사이트 장바구니는 이 브라우저에 저장돼요. 실제 결제는 무신사에서 해요.</div></div>`}
+const ownThumbs=(arr,n=6)=>`<div class="thumbs">${arr.slice(0,n).map(c=>{const s=cImg(c);return `<button onclick="openC('${esc(c._id)}')" title="${esc(c.name)}"><i>${s?`<img loading="lazy" src="${s}" alt="">`:''}</i><b>${esc(groupOf(c))}</b></button>`}).join('')}${arr.length>n?`<span class="sub">+${arr.length-n}</span>`:''}</div>`;
+
+/* 뭘 살까 탭 */
+let recoCat='전체';
+const TIER={buy:'사기 좋아요',hold:'고민해 볼 만해요',skip:'우선순위 낮아요'};
+const tierOf=s=>s>=80?'buy':s>=60?'hold':'skip';
+function recoList(){const W=winterCloset();const arr=likes().filter(p=>!p.bought&&p.c1!=='속옷/홈웨어').map(p=>({p,m:matchProduct(p,W),z:sizeReco(p)}));
+  const grp={};arr.forEach(x=>(grp[x.p.c1+'|'+x.m.group]??=[]).push(x));
+  Object.values(grp).forEach(xs=>{if(xs.length<2)return;xs.sort((a,b)=>b.m.score-a.m.score||(a.p.likeRank||999)-(b.p.likeRank||999));
+    xs.forEach((x,k)=>{if(k)x.m.score=Math.max(0,x.m.score-Math.min(6+3*(k-1),18));
+      x.m.reasons.push(k?{t:'note',m:`좋아요 속 ${x.m.group} ${xs.length}개 중 ${k+1}번째 — 위 상품을 사면 우선순위가 내려가요`}:{t:'good',m:`좋아요 속 ${x.m.group} ${xs.length}개 중 1순위`})})});
+  return arr.sort((a,b)=>b.m.score-a.m.score||(a.p.likeRank||999)-(b.p.likeRank||999))}
+function catAdvice(c,W){const own={};W.filter(x=>x.c1===c).forEach(x=>{const g=groupOf(x);own[g]=(own[g]||0)+1});const s=Object.entries(own).sort((a,b)=>b[1]-a[1]);
+  const gaps=[...new Set(likes().filter(p=>p.c1===c&&!p.bought).map(groupOf))].filter(g=>!own[g]);
+  return `<p class="advice">내 겨울 ${esc(c)} — ${s.length?s.map(([g,n])=>`${esc(g)} ${n}`).join(' · '):'아직 없음'}${gaps.length?`<br>좋아요 중 <b>${gaps.map(esc).join(', ')}</b>은(는) 옷장에 없는 종류예요.`:''}</p>`}
+function recoCard(x,rank){const {p,m,z}=x,t=tierOf(m.score),id=esc(p._id);
+  return `<article class="rc"><button class="ph rph" onclick="openP('${id}')">${ph(pImg(p),p.brand)}<span class="rank">${rank}</span></button>
+  <div class="rbody"><div class="rtop"><span class="score ${t}">${m.score}</span><div><b class="tier ${t}">${TIER[t]}</b><div class="b">${esc(p.brand)} · ${esc(p.c2)}</div></div></div>
+  <h3 onclick="openP('${id}')">${esc(p.name)}</h3><div class="pr mono">${won(p.price)}${p.dc?` <em>${p.dc}%</em>`:''}</div>
+  <ul class="why">${m.reasons.map(r=>`<li class="${r.t}">${esc(r.m)}</li>`).join('')}</ul>
+  ${m.pairs.length?`<div class="k">같이 입을 내 겨울 옷</div>${ownThumbs(m.pairs)}`:''}
+  ${sizeBox(z)}
+  <div class="row">${cartCtl(p,z,'r')}<button class="btn ghost" onclick="openP('${id}')">자세히</button></div></div></article>`}
+function renderReco(){
+  const W=winterCloset(),cnt={};W.forEach(c=>cnt[c.c1]=(cnt[c.c1]||0)+1);
+  $('#recoWinter').innerHTML=W.length?`<div class="panel"><h3 class="ph3">내 겨울 옷 ${W.length}벌</h3><div class="wstat">${ORDER.filter(c=>cnt[c]).map(c=>`<span>${c}<b>${cnt[c]}</b></span>`).join('')}</div><div class="wsum">${W.filter(cImg).slice(0,30).map(c=>`<button onclick="openC('${esc(c._id)}')" title="${esc(c.name)}"><img loading="lazy" src="${cImg(c)}" alt=""></button>`).join('')}</div><p class="empty-note" style="margin-top:8px">계절 칸에 겨울·사계절이 있는 옷, 계절이 비어 있어도 패딩·코트·니트·후드처럼 겨울에 입는 옷을 모았어요.</p></div>`
+    :`<div class="panel"><p class="empty-note">${S.loaded?'겨울 옷이 아직 없어요.':'불러오는 중…'}</p></div>`;
+  const all=recoList();const cats=ORDER.filter(c=>c!=='속옷/홈웨어'&&all.some(x=>x.p.c1===c));
+  $('#recoPicks').innerHTML=cats.length?cats.map(c=>{const x=all.find(x=>x.p.c1===c),t=tierOf(x.m.score);
+    return `<button class="pick" onclick="recoCat='전체';renderReco();document.getElementById('rc-${c}').scrollIntoView({behavior:'smooth'})"><div class="ph">${ph(pImg(x.p),x.p.brand)}<div class="tags"><span class="tg">${c}</span></div></div><div class="k"><span class="tier ${t}">${x.m.score}점</span> · ${esc(x.p.brand)}</div><div class="n">${esc(x.p.name)}</div><div class="mono">${won(x.p.price)}${x.z.label?' · '+esc(x.z.label):''}</div></button>`}).join('')
+    :`<p class="empty-note">${S.loaded?'좋아요 상품이 없어요.':'불러오는 중…'}</p>`;
+  $('#recoChips').innerHTML=cats.length?['전체',...cats].map(c=>`<button class="chip ${c===recoCat?'on':''}" onclick="recoCat='${c}';renderReco()">${c}<sup>${c==='전체'?all.length:all.filter(x=>x.p.c1===c).length}</sup></button>`).join(''):'';
+  $('#recoList').innerHTML=cats.filter(c=>recoCat==='전체'||recoCat===c).map(c=>{const xs=all.filter(x=>x.p.c1===c),nb=xs.filter(x=>x.m.score>=80).length;
+    return `<section class="rcat" id="rc-${c}"><h2>${c} <small>${xs.length}개 중 사기 좋아요 ${nb}개</small></h2>${catAdvice(c,W)}${xs.slice(0,3).map((x,i)=>recoCard(x,i+1)).join('')}${xs.length>3?`<details class="more"><summary>나머지 ${xs.length-3}개 보기</summary>${xs.slice(3).map((x,i)=>recoCard(x,i+4)).join('')}</details>`:''}</section>`}).join('');
+}
 
 /* ---------------- boot ---------------- */
 renderAll();
