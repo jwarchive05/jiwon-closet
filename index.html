@@ -381,7 +381,7 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
 
     <!-- RECO -->
     <section class="view" id="v-reco">
-      <div class="head"><div><h1>겨울 옷장 기준,<br><em>뭘 살까.</em></h1><p class="lead">지금 가진 겨울 옷과 좋아요한 옷을 맞춰 봤어요. 옷장에 없는 종류일수록, 내 옷과 색이 잘 맞을수록 점수가 올라가요. 사이즈는 평소 입는 사이즈를 기준으로, 같은 종류 내 옷의 총장과 비교해 알려 줘요.</p></div></div>
+      <div class="head"><div><h1>겨울~봄 옷장 기준,<br><em>뭘 살까.</em></h1><p class="lead">지금 가진 옷과 좋아요한 옷을 맞춰 봤어요. 겨울부터 봄까지 길게 입을 수 있는 옷, 가진 아우터·상의·바지와 두루 맞는 옷일수록 점수가 올라가요. 옷장에 없는 종류일수록, 내 옷과 색이 잘 맞을수록 점수가 올라가요. 사이즈는 평소 입는 사이즈를 기준으로, 같은 종류 내 옷의 총장과 비교해 알려 줘요.</p></div></div>
       <div id="recoWinter"></div>
       <div class="sec" style="margin-top:44px"><h2>카테고리별 1순위</h2><div class="picks" id="recoPicks"></div></div>
       <div class="toolbar" id="recoChips" style="margin-top:48px;margin-bottom:0"></div>
@@ -399,7 +399,7 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
     <!-- LOOKS -->
     <section class="view" id="v-looks">
       <div class="head">
-        <div><h1>코디</h1><p class="lead">엑셀 "코디" 시트에 적은 코디예요. 아이템 칸에 c:옷장ID, p:상품ID를 쉼표로 적어요. 옷장 아이템에는 <span class="tg cart">MY</span> 표시가 붙어요.</p></div>
+        <div><h1>코디</h1><p class="lead">엑셀 "코디" 시트에 적은 코디예요. 가진 옷 비중, 겨울~봄 활용도, 색 조합으로 점수를 매겨 높은 순으로 보여줘요. 아이템 칸에 c:옷장ID, p:상품ID를 쉼표로 적어요. 옷장 아이템에는 <span class="tg cart">MY</span> 표시가 붙어요.</p></div>
       </div>
       <div id="genArea"></div>
       <div class="looks" id="lookList"></div>
@@ -578,14 +578,30 @@ function renderCart(){
     </div></article>`}).join('');
 }
 function lookItem(ref){const t=ref.slice(0,1),id=ref.slice(2);if(t==='p'){const p=S.products[id];return p?{src:pImg(p),label:p.brand,kind:p.c2,price:p.price,open:`openP('${esc(id)}')`,own:!!p.bought,bought:!!p.bought}:null}const c=S.closet[id];return c?{src:cImg(c),label:c.name,kind:c.c2||c.c1,price:0,open:`openC('${esc(id)}')`,own:true}:null}
+
+function lookScore(L){const refs=(L.items||[]).map(r=>{const t=r.slice(0,1),id=r.slice(2);const x=t==='p'?S.products[id]:S.closet[id];return x?{x,own:t==='c'||!!x.bought}:null}).filter(Boolean);
+  if(!refs.length)return {score:0,reasons:[]};const R=[];
+  const own=refs.filter(r=>r.own).length,ownR=own/refs.length;
+  const core=refs.filter(r=>['아우터','상의','바지'].includes(r.x.c1));
+  const spans=refs.map(r=>spanOf(r.x)),sp=spans.reduce((a,b)=>a+b,0)/spans.length;
+  const fams=core.map(r=>cFam(r.x)).filter(Boolean);let cs=0,cn=0;
+  for(let i=0;i<fams.length;i++)for(let j=i+1;j<fams.length;j++){cs+=compat(fams[i],fams[j]);cn++}
+  const col=cn?cs/cn/2:.6;
+  let s=ownR*35+Math.max(0,Math.min(1,(sp-.4)/.6))*45+col*20;
+  R.push({t:ownR>=.6?'good':ownR>=.4?'note':'warn',m:`${refs.length}개 중 ${own}개가 이미 가진 옷이에요`});
+  const weak=refs.filter(r=>spanOf(r.x)<.5).map(r=>r.x.name);
+  R.push({t:sp>=.8?'good':sp>=.6?'note':'warn',m:sp>=.8?'겨울부터 봄까지 그대로 입을 수 있어요':weak.length?`봄엔 바꿔야 할 아이템: ${weak.slice(0,2).join(', ')}`:'계절 폭이 조금 좁아요'});
+  R.push({t:col>=.85?'good':col>=.6?'note':'warn',m:col>=.85?'색 조합이 안정적이에요':col>=.6?'색 조합 무난해요':'색이 부딪힐 수 있어요'});
+  return {score:Math.max(0,Math.min(100,Math.round(s))),reasons:R}}
 function lookCard(L,actions,i){const its=(L.items||[]).map(lookItem).filter(Boolean);
   const tot=its.filter(x=>!x.own).reduce((a,x)=>a+x.price,0);
   return `<article class="look"><div class="strip">${its.slice(0,4).map(x=>`<button onclick="${x.open}">${x.src?`<img loading="lazy" src="${x.src}" alt="">`:''}${x.own?'<span class="tg cart own">MY</span>':`<span class="lb">${esc(x.label)}</span>`}</button>`).join('')}</div>
-   <div class="body">${i!=null?`<div class="no">LOOK ${String(i+1).padStart(2,'0')}</div>`:''}<h3>${esc(L.title)}</h3>${L.tag?`<div><span class="tg cart">${esc(L.tag)}</span></div>`:''}<p>${esc(L.desc)}</p>
+   <div class="body">${(()=>{const sc=lookScore(L),t=tierOf(sc.score);return `<div class="rtop" style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><span class="score ${t}">${sc.score}</span><div>${i!=null?`<div class="no">LOOK ${String(i+1).padStart(2,'0')}</div>`:''}<b class="tier ${t}">${{buy:'지금 바로 입기 좋아요',hold:'괜찮은 조합이에요',skip:'계절·보유 아이템이 아쉬워요'}[t]}</b></div></div>`})()}<h3>${esc(L.title)}</h3>${L.tag?`<div><span class="tg cart">${esc(L.tag)}</span></div>`:''}<p>${esc(L.desc)}</p>
+   <ul class="why" style="margin:6px 0 10px">${lookScore(L).reasons.map(r=>`<li class="${r.t}">${esc(r.m)}</li>`).join('')}</ul>
    <ul>${its.map(x=>`<li onclick="${x.open}"><span>${esc(x.label)} · ${esc(x.kind||'')}</span><em>${x.own?'보유':won(x.price)}</em></li>`).join('')}</ul>
    <div class="foot"><span>새로 사면 <b class="mono" style="color:var(--ink)">${won(tot)}</b></span>${actions||''}</div></div></article>`}
 function renderLooks(){
-  const ls=Object.values(S.looks);
+  const ls=Object.values(S.looks).sort((a,b)=>lookScore(b).score-lookScore(a).score);
   $('#lookList').innerHTML=ls.length?ls.map((L,i)=>lookCard(L,'',i)).join(''):`<p class="empty-note">${S.loaded?'아직 저장된 코디가 없어요.':'불러오는 중…'}</p>`;
 }
 
@@ -722,6 +738,25 @@ function isWinterOwn(c){const s=c.season||'',g=groupOf(c);
   return WINTER_G.includes(g)&&!/바람막이/.test(c.c2||'')}
 const isWinterProd=p=>!/반소매|숏 팬츠|샌들|슬리퍼/.test(p.c2||'');
 const winterCloset=()=>closet().filter(isWinterOwn);
+/* 겨울~봄 활용도: w=겨울, s=봄(환절기) 0~1 */
+function seasonSpan(x){const s=x.season||'',c2=x.c2||'',nm=x.name||'',g=groupOf(x),t=c2+' '+nm;
+  if(/반소매|숏 팬츠|샌들|슬리퍼|반팔|하프 슬리브/.test(t)||g==='반소매'||g==='숏 팬츠')return {w:0,s:.6};
+  const heavy=/롱패딩|헤비|돕바|무스탕|무톤|구스|다운|패디드|더블 코트|POLARTEC 플리스 와이드|머플러|장갑/i.test(t)&&!/경량|라이트|SL\b|액티브 라이트/i.test(t);
+  if(s){const W=/겨울|사계절/.test(s),Sp=/봄|사계절/.test(s),Fa=/가을/.test(s);
+    if(W&&Sp)return {w:1,s:1};
+    if(W)return {w:1,s:heavy?.15:Fa?(x.c1==='아우터'?.6:.8):.3};
+    if(Sp||Fa)return {w:['상의','바지','신발','가방'].includes(x.c1)?.7:.4,s:1};
+    return {w:0,s:.5}}
+  if(heavy)return {w:1,s:.15};
+  if(['신발','가방'].includes(x.c1))return {w:1,s:1};
+  if(/코트/.test(c2))return {w:1,s:.75};
+  if(/레더|라이더스|스웨이드/.test(t))return {w:.6,s:1};
+  if(/경량|라이트/.test(t))return {w:.8,s:.8};
+  if(['니트','카디건','플리스','사파리·필드','블루종','후드·맨투맨','후드 집업','셔츠','긴소매','코튼 팬츠','데님','슬랙스','재킷','트레이닝'].includes(g))return {w:/헤비|코듀로이|울/.test(t)?1:.85,s:/헤비/.test(t)?.6:1};
+  return {w:.6,s:.6}}
+const spanOf=x=>{const z=seasonSpan(x);return Math.min(z.w,z.s)*.7+(z.w+z.s)/2*.3};
+const wsCloset=()=>closet().filter(c=>{const z=seasonSpan(c);return z.w>=.5&&(z.w+z.s)>=1.2});
+
 
 /* 색 궁합 */
 const NEU=['블랙','차콜','그레이','화이트'];
@@ -741,20 +776,25 @@ function matchProduct(p,W){
   const buckets=ORDER.map(k=>srt.filter(x=>x.c.c1===k)).filter(b=>b.length);const pairs=[];
   for(let i=0;pairs.length<srt.length;i++)buckets.forEach(b=>{if(b[i])pairs.push(b[i])});
   let s=50;const R=[];const n=same.length;const gf=!isWinterProd(p)?0:['소품','가방'].includes(p.c1)?.5:1;
-  if(n===0){s+=22*gf;R.push({t:'good',m:`겨울 옷장에 ${g} 종류가 아직 없어요 — 새 조합이 생겨요`})}
+  if(n===0){s+=22*gf;R.push({t:'good',m:`겨울~봄 옷장에 ${g} 종류가 아직 없어요 — 새 조합이 생겨요`})}
   else if(n===1){s+=12*gf;R.push({t:'good',m:`${g} 종류는 1벌뿐이라 번갈아 입기 좋아요`})}
   else if(n===2){s+=3;R.push({t:'note',m:`${g} 종류 이미 2벌 있어요`})}
   else{s-=8+(n-3)*3;R.push({t:'warn',m:`${g} 종류가 이미 ${n}벌 있어요`})}
-  const unk=best.sc.length-best.good-best.bad;const vers=best.good+.5*unk;s+=Math.min(vers,14)*1.5;
+  const unk=best.sc.length-best.good-best.bad;const vers=best.good+.5*unk;s+=Math.min(vers,14)*1.1;
   if(pool.length){const byC={};best.sc.filter(x=>x.s>=2).forEach(x=>byC[x.c.c1]=(byC[x.c.c1]||0)+1);
     const tx=Object.entries(byC).map(([k,v])=>k+' '+v).join(' · ');
-    R.push({t:best.good>=6?'good':best.good>=3?'note':'warn',m:best.good?`색이 잘 맞는 내 겨울 옷 ${best.good}벌 (${tx})`:`색 궁합이 확실한 내 겨울 옷이 적어요`})}
+    R.push({t:best.good>=6?'good':best.good>=3?'note':'warn',m:best.good?`색이 잘 맞는 내 겨울~봄 옷 ${best.good}벌 (${tx})`:`색 궁합이 확실한 내 옷이 적어요`});
+    const nc=Object.keys(byC).filter(k=>['아우터','상의','바지'].includes(k)).length;if(nc>=2&&best.good>=6){s+=3;R.push({t:'good',m:`내 ${Object.keys(byC).filter(k=>['아우터','상의','바지'].includes(k)).join('·')}와 모두 맞춰 입을 수 있어요`})}}
   if(best.bad>=3){s-=4;R.push({t:'warn',m:`색이 부딪히는 내 옷 ${best.bad}벌`})}
   if(dup.length){s-=10;R.push({t:'warn',m:`같은 색 ${g} 있음: ${dup[0].name}`})}
   if(opts.length>1&&best.f)R.push({t:'note',m:`색은 ${best.f} 추천 — 내 옷과 가장 잘 맞아요`});
   if(lastDrop(p)){s+=4;R.push({t:'good',m:'최근 가격이 내렸어요'})}
   if(p.dc>=40)s+=3;
+  const sp=seasonSpan(p);
   if(!isWinterProd(p)){s-=25;R.push({t:'warn',m:'겨울에 입기엔 가벼운 옷이에요'})}
+  else if(sp.w>=.8&&sp.s>=.8){s+=8;R.push({t:'good',m:'겨울부터 봄까지 입을 수 있어요'})}
+  else if(sp.s>=.6){s+=2;R.push({t:'note',m:'한겨울엔 레이어드가 필요하지만 봄까지 길게 입어요'})}
+  else{s-=10;R.push({t:'warn',m:'한겨울용이라 봄엔 못 입어요'})}
   if(p.price>=200000)s-=4;
   if(p.verdict?.v==='skip')s-=10;if(p.verdict?.v==='buy')s+=5;
   return {score:Math.max(0,Math.min(100,Math.round(s))),reasons:R,pairs:pairs.map(x=>x.c),color:best.f,group:g,same}
@@ -828,7 +868,7 @@ const ownThumbs=(arr,n=6)=>`<div class="thumbs">${arr.slice(0,n).map(c=>{const s
 let recoCat='전체';
 const TIER={buy:'사기 좋아요',hold:'고민해 볼 만해요',skip:'우선순위 낮아요'};
 const tierOf=s=>s>=80?'buy':s>=60?'hold':'skip';
-function recoList(){const W=winterCloset();const arr=likes().filter(p=>!p.bought&&p.c1!=='속옷/홈웨어').map(p=>({p,m:matchProduct(p,W),z:sizeReco(p)}));
+function recoList(){const W=wsCloset();const arr=likes().filter(p=>!p.bought&&p.c1!=='속옷/홈웨어').map(p=>({p,m:matchProduct(p,W),z:sizeReco(p)}));
   const grp={};arr.forEach(x=>(grp[x.p.c1+'|'+x.m.group]??=[]).push(x));
   Object.values(grp).forEach(xs=>{if(xs.length<2)return;xs.sort((a,b)=>b.m.score-a.m.score||(a.p.likeRank||999)-(b.p.likeRank||999));
     xs.forEach((x,k)=>{if(k)x.m.score=Math.max(0,x.m.score-Math.min(6+3*(k-1),18));
@@ -836,18 +876,18 @@ function recoList(){const W=winterCloset();const arr=likes().filter(p=>!p.bought
   return arr.sort((a,b)=>b.m.score-a.m.score||(a.p.likeRank||999)-(b.p.likeRank||999))}
 function catAdvice(c,W){const own={};W.filter(x=>x.c1===c).forEach(x=>{const g=groupOf(x);own[g]=(own[g]||0)+1});const s=Object.entries(own).sort((a,b)=>b[1]-a[1]);
   const gaps=[...new Set(likes().filter(p=>p.c1===c&&!p.bought).map(groupOf))].filter(g=>!own[g]);
-  return `<p class="advice">내 겨울 ${esc(c)} — ${s.length?s.map(([g,n])=>`${esc(g)} ${n}`).join(' · '):'아직 없음'}${gaps.length?`<br>좋아요 중 <b>${gaps.map(esc).join(', ')}</b>은(는) 옷장에 없는 종류예요.`:''}</p>`}
+  return `<p class="advice">내 겨울~봄 ${esc(c)} — ${s.length?s.map(([g,n])=>`${esc(g)} ${n}`).join(' · '):'아직 없음'}${gaps.length?`<br>좋아요 중 <b>${gaps.map(esc).join(', ')}</b>은(는) 옷장에 없는 종류예요.`:''}</p>`}
 function recoCard(x,rank){const {p,m,z}=x,t=tierOf(m.score),id=esc(p._id);
   return `<article class="rc"><button class="ph rph" onclick="openP('${id}')">${ph(pImg(p),p.brand)}<span class="rank">${rank}</span></button>
   <div class="rbody"><div class="rtop"><span class="score ${t}">${m.score}</span><div><b class="tier ${t}">${TIER[t]}</b><div class="b">${esc(p.brand)} · ${esc(p.c2)}</div></div></div>
   <h3 onclick="openP('${id}')">${esc(p.name)}</h3><div class="pr mono">${won(p.price)}${p.dc?` <em>${p.dc}%</em>`:''}</div>
   <ul class="why">${m.reasons.map(r=>`<li class="${r.t}">${esc(r.m)}</li>`).join('')}</ul>
-  ${m.pairs.length?`<div class="k">같이 입을 내 겨울 옷</div>${ownThumbs(m.pairs)}`:''}
+  ${m.pairs.length?`<div class="k">같이 입을 내 옷</div>${ownThumbs(m.pairs)}`:''}
   ${sizeBox(z)}
   <div class="row">${cartCtl(p,z,'r')}<button class="btn ghost" onclick="openP('${id}')">자세히</button></div></div></article>`}
 function renderReco(){
-  const W=winterCloset(),cnt={};W.forEach(c=>cnt[c.c1]=(cnt[c.c1]||0)+1);
-  $('#recoWinter').innerHTML=W.length?`<div class="panel"><h3 class="ph3">내 겨울 옷 ${W.length}벌</h3><div class="wstat">${ORDER.filter(c=>cnt[c]).map(c=>`<span>${c}<b>${cnt[c]}</b></span>`).join('')}</div><div class="wsum">${W.filter(cImg).slice(0,30).map(c=>`<button onclick="openC('${esc(c._id)}')" title="${esc(c.name)}"><img loading="lazy" src="${cImg(c)}" alt=""></button>`).join('')}</div><p class="empty-note" style="margin-top:8px">계절 칸에 겨울·사계절이 있는 옷, 계절이 비어 있어도 패딩·코트·니트·후드처럼 겨울에 입는 옷을 모았어요.</p></div>`
+  const W=wsCloset(),cnt={};W.forEach(c=>cnt[c.c1]=(cnt[c.c1]||0)+1);
+  $('#recoWinter').innerHTML=W.length?`<div class="panel"><h3 class="ph3">내 겨울~봄 옷 ${W.length}벌</h3><div class="wstat">${ORDER.filter(c=>cnt[c]).map(c=>`<span>${c}<b>${cnt[c]}</b></span>`).join('')}</div><div class="wsum">${W.filter(cImg).slice(0,30).map(c=>`<button onclick="openC('${esc(c._id)}')" title="${esc(c.name)}"><img loading="lazy" src="${cImg(c)}" alt=""></button>`).join('')}</div><p class="empty-note" style="margin-top:8px">겨울에 입을 수 있고 봄 환절기까지 이어 입을 수 있는 옷을 모았어요. 한여름 옷과 한겨울에만 입는 헤비 아우터는 빠져요.</p></div>`
     :`<div class="panel"><p class="empty-note">${S.loaded?'겨울 옷이 아직 없어요.':'불러오는 중…'}</p></div>`;
   const all=recoList();const cats=ORDER.filter(c=>c!=='속옷/홈웨어'&&all.some(x=>x.p.c1===c));
   $('#recoPicks').innerHTML=cats.length?cats.map(c=>{const x=all.find(x=>x.p.c1===c),t=tierOf(x.m.score);
