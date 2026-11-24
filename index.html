@@ -314,6 +314,24 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
 .cartsum .k{font-size:12.5px;color:var(--mute);font-weight:600}
 .cartsum .v{font-family:var(--font-mono);font-size:24px;font-weight:700}
 @media (max-width:640px){.rc{grid-template-columns:120px 1fr;gap:14px}.rc h3{font-size:16px}}
+.when{margin:10px 0 4px;border-left:3px solid var(--accent);padding:6px 10px;background:var(--surface)}
+.when b{font-size:12px;color:var(--mute);margin-right:8px}.when span{font-weight:700}.when p{margin:4px 0 0;font-size:13px;color:var(--mute)}
+.ctl{margin:0 0 34px}.ctl h2{font-size:18px;margin:0 0 10px}
+.ctl-row{display:grid;grid-template-columns:170px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.ctl-row.first .ctl-d b{color:var(--accent)}.ctl-d b{display:block;font-size:15px}.ctl-d span{font-size:12.5px;color:var(--mute)}
+.ctl-i{display:flex;gap:8px;flex-wrap:wrap}.ctl-i button{border:0;background:none;padding:0;cursor:pointer;width:64px;text-align:center}
+.ctl-i i{display:block;width:64px;height:76px;background:var(--line);overflow:hidden;border-radius:2px}.ctl-i img{width:100%;height:100%;object-fit:cover}
+.ctl-i span{display:block;font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wx{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:stretch;margin-bottom:18px}
+.wx-now{background:var(--ink);color:var(--bg);padding:14px 16px;border-radius:2px}.wx-now .k{font-size:12px;opacity:.7}.wx-now .v{font-size:34px;font-weight:700}.wx-now .s{font-size:12.5px;opacity:.8}
+.wx-bands{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.wxb{border:1px solid var(--line);background:var(--surface);padding:10px;text-align:left;cursor:pointer;border-radius:2px}
+.wxb b{display:block;font-size:16px}.wxb span{display:block;font-size:12px;color:var(--mute)}.wxb small{font-size:11px;color:var(--mute)}.wxb.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.wx-tip{grid-column:1/-1;margin:0;font-size:14px;color:var(--mute)}.wx-tip b{color:var(--ink);margin-right:6px}
+.pref{display:flex;justify-content:space-between;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);padding:12px 16px;margin-bottom:18px;border-radius:2px}
+.pref .k{font-size:12px;color:var(--mute);font-weight:600}.pref .v{font-size:15px}.pref .s{font-size:12.5px;color:var(--mute);margin-top:2px}
+.pb{display:inline-flex;gap:6px}.pb button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
+.pb button.on{background:var(--accent);border-color:var(--accent);color:#fff}.pb button.on.no{background:var(--mute);border-color:var(--mute)}
+@media (max-width:640px){.wx{grid-template-columns:1fr}.wx-bands{grid-template-columns:repeat(2,1fr)}.ctl-row{grid-template-columns:1fr}.pref{flex-direction:column;align-items:flex-start}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -324,7 +342,6 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
     <nav class="nav" id="nav">
       <a href="#home" data-v="home">홈</a>
       <a href="#closet" data-v="closet">내 옷장 <span id="n-closet">0</span></a>
-      <a href="#likes" data-v="likes">좋아요 <span id="n-likes">0</span></a>
       <a href="#reco" data-v="reco">뭘 살까</a>
       <a href="#cart" data-v="cart">장바구니 <span id="n-cart">0</span></a>
       <a href="#looks" data-v="looks">코디 <span id="n-looks">0</span></a>
@@ -338,7 +355,7 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
 
     <!-- HOME -->
     <section class="view" id="v-home">
-      <h1 id="homeTitle">내 옷, 좋아요, 장바구니를<br><em>한 화면에.</em></h1><p class="lead">옷장에 반영된 변경 사항은 화면을 새로 열거나 새로고침하면 보여요. 직접 수정한 엑셀은 아래에서 불러올 수 있어요.</p>
+      <h1 id="homeTitle">내 옷, 장바구니, 코디를<br><em>한 화면에.</em></h1><p class="lead">옷장에 반영된 변경 사항은 화면을 새로 열거나 새로고침하면 보여요. 직접 수정한 엑셀은 아래에서 불러올 수 있어요.</p>
       <div class="mosaic" id="mosaic"></div>
       <div class="tiles" id="tiles"></div>
       <div id="homeInbox"></div>
@@ -369,17 +386,6 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
       <div class="grid" id="closetGrid"></div>
     </section>
 
-    <!-- LIKES -->
-    <section class="view" id="v-likes">
-      <div class="head"><div><h1>좋아요</h1><p class="lead">무신사에서 좋아요한 상품이에요. 가격이 내려간 상품에는 초록 표시가 붙어요.</p></div></div>
-      <div class="toolbar">
-        <div id="likeChips" class="row"></div><div class="sp"></div>
-        <input type="search" id="likeQ" placeholder="브랜드·상품명 검색" aria-label="좋아요 검색">
-        <select id="likeSort" aria-label="정렬"><option value="rank">좋아요 누른 순</option><option value="low">낮은 가격순</option><option value="high">높은 가격순</option><option value="dc">할인율순</option><option value="drop">가격 인하 먼저</option></select>
-      </div>
-      <div class="grid" id="likeGrid"></div>
-    </section>
-
     <!-- RECO -->
     <section class="view" id="v-reco">
       <div class="head"><div><h1>겨울~봄 옷장 기준,<br><em>뭘 살까.</em></h1><p class="lead">지금 가진 옷과 좋아요한 옷을 맞춰 봤어요. 겨울부터 봄까지 길게 입을 수 있는 옷, 가진 아우터·상의·바지와 두루 맞는 옷일수록 점수가 올라가요. 옷장에 없는 종류일수록, 내 옷과 색이 잘 맞을수록 점수가 올라가요. 사이즈는 평소 입는 사이즈를 기준으로, 같은 종류 내 옷의 총장과 비교해 알려 줘요.</p></div></div>
@@ -392,7 +398,7 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
     <!-- CART -->
     <section class="view" id="v-cart">
       <div class="head">
-        <div><h1>장바구니</h1><p class="lead">무신사 장바구니와 이 사이트에서 담은 상품을 같이 보여줘요. 담아 둔 상품마다 이미 비슷한 옷이 있는지, 같이 입을 옷이 있는지, 좋아요 중 대안이 있는지 확인해요.</p></div>
+        <div><h1>장바구니</h1><p class="lead">무신사 장바구니와 이 사이트에서 담은 상품을 같이 보여줘요. 위에서 언제 살지 회차·쿠폰 마감 순으로 묶어 보여주고, 상품마다 이미 비슷한 옷이 있는지, 같이 입을 옷이 있는지 확인해요.</p></div>
       </div>
       <div id="cartList"></div>
     </section>
@@ -400,9 +406,11 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
     <!-- LOOKS -->
     <section class="view" id="v-looks">
       <div class="head">
-        <div><h1>코디</h1><p class="lead">엑셀 "코디" 시트에 적은 코디예요. 가진 옷 비중, 겨울~봄 활용도, 색 조합으로 점수를 매겨 높은 순으로 보여줘요. 아이템 칸에 c:옷장ID, p:상품ID를 쉼표로 적어요. 옷장 아이템에는 <span class="tg cart">MY</span> 표시가 붙어요.</p></div>
+        <div><h1>오늘 날씨에 맞춰,<br><em>뭐 입지.</em></h1><p class="lead">서울 기온에 맞는 코디를 먼저 보여줘요. 코디마다 <b>좋아요 / 별로</b>를 누르면 이 브라우저에 기록되고, 좋아한 코디에 들어간 옷이 있는 코디가 위로 올라와요. 기록은 "취향 기록 복사"로 채팅에 붙여 주면 엑셀 "선호" 시트에 옮겨 둘게요.</p></div>
       </div>
-      <div id="genArea"></div>
+      <div id="wxArea"></div>
+      <div id="prefArea"></div>
+      <div class="toolbar" id="lookChips"></div>
       <div class="looks" id="lookList"></div>
     </section>
   </main>
@@ -413,7 +421,7 @@ details.more summary{cursor:pointer;font-weight:600;font-size:14px;padding:14px 
 
 <script>
 /* ---------------- state ---------------- */
-const S={products:{},closet:{},looks:{},inbox:{},imgmap:{},meta:null,ibdone:{},loaded:false};
+const S={prefs:[],products:{},closet:{},looks:{},inbox:{},imgmap:{},meta:null,ibdone:{},loaded:false};
 let SRC='';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -467,16 +475,16 @@ const FAM=[['블랙','black'],['차콜','charcoal','챠콜'],['그레이','grey'
 const fam=c=>{c=(c||'').toLowerCase();const f=FAM.find(f=>f.some(w=>c.includes(w)));return f?f[0]:null};
 
 /* ---------------- routing ---------------- */
-const VIEWS=['home','closet','likes','reco','cart','looks'];
+const VIEWS=['home','closet','reco','cart','looks'];
 function route(){const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):'home';
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('on',el.id==='v-'+v));
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.v===v));window.scrollTo(0,0)}
 addEventListener('hashchange',route);route();
 
 /* ---------------- render ---------------- */
-function renderAll(){renderCounts();renderHome();renderCloset();renderLikes();renderReco();renderCart();renderLooks()}
+function renderAll(){renderCounts();renderHome();renderCloset();renderReco();renderCart();renderLooks()}
 function renderCounts(){
-  $('#n-closet').textContent=closet().length;$('#n-likes').textContent=likes().length;
+  $('#n-closet').textContent=closet().length;
   $('#n-cart').textContent=cart().length;$('#n-looks').textContent=Object.keys(S.looks).length;
   $('#lastSync').textContent=S.meta?.lastSync||'—';
 }
@@ -490,8 +498,8 @@ function renderHome(){
   const drops=L.concat(C).filter(lastDrop);
   $('#tiles').innerHTML=[
     ['#closet','내 옷장',cl.length+'벌',cl.length?'':'아직 비어 있어요'],
-    ['#likes','좋아요',L.length+'개',drops.length?`가격 인하 ${drops.length}개`:'가격 변동 없음'],
     ['#cart','장바구니',C.length+'개',won(cartSum)],
+    ['#cart','다음에 살 것',(()=>{const g=cartGroups(C);return g.length?g[0].items.length+'개':'없음'})(),(()=>{const g=cartGroups(C);return g.length?g[0].label:'—'})()],
     ['#looks','코디',Object.keys(S.looks).length+'개','옷장이 찰수록 늘어나요']
   ].map(([h,k,v,s])=>`<a class="tile" href="${h}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></a>`).join('');
   const ch=S.meta?.changes||{};const byId=id=>S.products[id];
@@ -533,7 +541,7 @@ function renderLikes(){
   f.sort(cmp);
   $('#likeGrid').innerHTML=f.length?f.map(card).join(''):`<p class="empty-note">${S.loaded?'조건에 맞는 상품이 없어요.':'불러오는 중…'}</p>`;
 }
-$('#likeQ').addEventListener('input',renderLikes);$('#likeSort').addEventListener('change',renderLikes);
+
 
 /* --- compare logic --- */
 function analyze(p){
@@ -551,7 +559,8 @@ function renderCart(){
   const C=cart();
   if(!C.length){$('#cartList').innerHTML=`<div class="panel"><p class="empty-note">${S.loaded?'장바구니가 비어 있어요. 좋아요나 뭘 살까 탭에서 + 담기를 누르면 여기에 모여요.':'불러오는 중…'}</p></div>`;return}
   const hasCloset=closet().length>0;
-  $('#cartList').innerHTML=cartSummary(C)+C.map(p=>{const a=analyze(p);const d=lastDrop(p);
+  C.sort((a,b)=>(a.cart.when||'9').localeCompare(b.cart.when||'9'));
+  $('#cartList').innerHTML=cartSummary(C)+cartTimeline(C)+C.map(p=>{const a=analyze(p);const d=lastDrop(p);
    const end=p.cart.saleEnd?Math.ceil((new Date(p.cart.saleEnd)-new Date())/864e5):null;
    const v=p.verdict;
    return `<article class="cmp">
@@ -560,6 +569,7 @@ function renderCart(){
      <div class="meta">${esc(p.brand)} · ${esc(p.c1)} &gt; ${esc(p.c2)}</div>
      <h3>${esc(p.name)}</h3>
      <div class="meta">${cartMeta(p)}${end!=null&&end>=0?` · <b style="color:var(--warn)">특가 종료 D-${end}</b>`:''}</div>
+     ${p.cart.when?`<div class="when"><b>언제 사기</b><span>${esc(whenLabel(p.cart.when))}</span>${p.cart.memo?`<p>${esc(p.cart.memo)}</p>`:''}</div>`:''}
      <dl class="product-specs">${productSpecs(p)}</dl>${p.c1!=='속옷/홈웨어'?sizeBox(sizeReco(p)):''}
      <div class="price"><em>${p.dc}%</em>${won(p.price)}<s>${won(p.normal)}</s>${d?` <span class="pill good">지난번보다 ${won(d.from-d.to)} 내림</span>`:''}</div>
      ${p.tip?`<div class="tip"><b>MEMO</b><p>${esc(p.tip)}</p></div>`:''}
@@ -597,14 +607,35 @@ function lookScore(L){const refs=(L.items||[]).map(r=>{const t=r.slice(0,1),id=r
 function lookCard(L,actions,i){const its=(L.items||[]).map(lookItem).filter(Boolean);
   const tot=its.filter(x=>!x.own).reduce((a,x)=>a+x.price,0);
   return `<article class="look"><div class="strip">${its.slice(0,4).map(x=>`<button onclick="${x.open}">${x.src?`<img loading="lazy" src="${x.src}" alt="">`:''}${x.own?'<span class="tg cart own">MY</span>':`<span class="lb">${esc(x.label)}</span>`}</button>`).join('')}</div>
-   <div class="body">${(()=>{const sc=lookScore(L),t=tierOf(sc.score);return `<div class="rtop" style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><span class="score ${t}">${sc.score}</span><div>${i!=null?`<div class="no">LOOK ${String(i+1).padStart(2,'0')}</div>`:''}<b class="tier ${t}">${{buy:'지금 바로 입기 좋아요',hold:'괜찮은 조합이에요',skip:'계절·보유 아이템이 아쉬워요'}[t]}</b></div></div>`})()}<h3>${esc(L.title)}</h3>${L.tag?`<div><span class="tg cart">${esc(L.tag)}</span></div>`:''}<p>${esc(L.desc)}</p>
+   <div class="body">${(()=>{const sc=lookScore(L),t=tierOf(sc.score);return `<div class="rtop" style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><span class="score ${t}">${sc.score}</span><div>${i!=null?`<div class="no">LOOK ${String(i+1).padStart(2,'0')}</div>`:''}<b class="tier ${t}">${{buy:'지금 바로 입기 좋아요',hold:'괜찮은 조합이에요',skip:'계절·보유 아이템이 아쉬워요'}[t]}</b></div></div>`})()}<h3>${esc(L.title)}</h3><div>${L.tag?`<span class="tg cart">${esc(L.tag)}</span> `:''}${(L.wx||[]).map(w=>`<span class="tg">${esc(w)}</span>`).join(' ')}</div><p>${esc(L.desc)}</p>
    <ul class="why" style="margin:6px 0 10px">${lookScore(L).reasons.map(r=>`<li class="${r.t}">${esc(r.m)}</li>`).join('')}</ul>
    <ul>${its.map(x=>`<li onclick="${x.open}"><span>${esc(x.label)} · ${esc(x.kind||'')}</span><em>${x.own?'보유':won(x.price)}</em></li>`).join('')}</ul>
    <div class="foot"><span>새로 사면 <b class="mono" style="color:var(--ink)">${won(tot)}</b></span>${actions||''}</div></div></article>`}
+const WX=[{k:'한파',r:'-3℃ 이하',min:-99,max:-3,tip:'패딩·무톤 + 니트/플리스 2겹, 장갑. 바지는 두꺼운 코튼이나 플리스.'},{k:'추위',r:'-3 ~ 5℃',min:-3,max:5,tip:'코트·필드재킷·패딩 안에 니트나 후드집업 한 겹.'},{k:'쌀쌀',r:'5 ~ 12℃',min:5,max:12,tip:'플리스·후드집업·하프집업을 아우터처럼. 얇은 이너 레이어드.'},{k:'선선',r:'12 ~ 18℃',min:12,max:18,tip:'트러커·포플린 재킷이나 풀집 하나. 밝은 바지로 봄 느낌.'}];
+let wxSel=null,wxNow=null,lookFilter='날씨';
+const PREF_KEY='wardrobe-pref-v1';let prefLocal={};try{prefLocal=JSON.parse(localStorage.getItem(PREF_KEY)||'{}')||{}}catch(e){}
+const savePref=()=>{try{localStorage.setItem(PREF_KEY,JSON.stringify(prefLocal))}catch(e){}};
+function prefOf(id){if(prefLocal[id])return prefLocal[id].r;const x=(S.prefs||[]).filter(p=>p.target===id).pop();return x?x.r:0}
+function itemAffinity(){const a={};Object.values(S.looks).forEach(L=>{const r=prefOf(L._id);if(r)(L.items||[]).forEach(i=>a[i]=(a[i]||0)+r)});(S.prefs||[]).forEach(p=>{if(/^[cp]:/.test(p.target))a[p.target]=(a[p.target]||0)+p.r*2});return a}
+function prefScore(L,aff){const own=prefOf(L._id)*12;const items=(L.items||[]).reduce((s,i)=>s+Math.max(-2,Math.min(2,aff[i]||0)),0)*2;return own+Math.max(-10,Math.min(10,items))}
+function setPref(id,r){prefLocal[id]=prefLocal[id]&&prefLocal[id].r===r?undefined:{r,at:todayStr()};if(!prefLocal[id])delete prefLocal[id];savePref();renderLooks();toast(r>0?'좋아요로 기록했어요':'별로로 기록했어요')}
+function prefText(){const L=S.looks;const rows=Object.entries(prefLocal).map(([id,v])=>`${v.at} · ${id} · ${v.r>0?'좋아':'별로'} · ${L[id]?L[id].title:''}`);return '[코디 취향 기록]\n'+(rows.join('\n')||'(아직 없음)')}
+function copyPref(){const s=prefText();(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(()=>toast('취향 기록을 복사했어요'),()=>{prompt('복사해서 채팅에 붙여 주세요',s)})}
+function bandOf(t){return WX.find(b=>t>=b.min&&t<b.max)||WX[WX.length-1]}
+async function loadWx(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.978&current=temperature_2m,apparent_temperature&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSeoul&forecast_days=1');const j=await r.json();wxNow={t:j.current.temperature_2m,f:j.current.apparent_temperature,max:j.daily.temperature_2m_max[0],min:j.daily.temperature_2m_min[0]};if(!wxSel)wxSel=bandOf(Math.round((wxNow.f+wxNow.max)/2)).k}catch(e){wxNow=null}renderLooks()}
 function renderLooks(){
-  const ls=Object.values(S.looks).sort((a,b)=>lookScore(b).score-lookScore(a).score);
-  $('#lookList').innerHTML=ls.length?ls.map((L,i)=>lookCard(L,'',i)).join(''):`<p class="empty-note">${S.loaded?'아직 저장된 코디가 없어요.':'불러오는 중…'}</p>`;
+  if(!wxSel)wxSel='추위';const band=WX.find(b=>b.k===wxSel);const aff=itemAffinity();
+  $('#wxArea').innerHTML=`<div class="wx"><div class="wx-now">${wxNow?`<div class="k">지금 서울</div><div class="v mono">${Math.round(wxNow.t)}℃</div><div class="s">체감 ${Math.round(wxNow.f)}℃ · 오늘 ${Math.round(wxNow.min)}~${Math.round(wxNow.max)}℃</div>`:'<div class="k">날씨를 고르세요</div><div class="s">기온을 불러오지 못하면 직접 골라요</div>'}</div><div class="wx-bands">${WX.map(b=>`<button class="wxb ${b.k===wxSel?'on':''}" onclick="wxSel='${b.k}';lookFilter='날씨';renderLooks()"><b>${b.k}</b><span>${b.r}</span><small>${Object.values(S.looks).filter(L=>(L.wx||[]).includes(b.k)).length}개</small></button>`).join('')}</div><p class="wx-tip"><b>${band.k}</b> ${esc(band.tip)}</p></div>`;
+  const liked=Object.values(S.looks).filter(L=>prefOf(L._id)>0),disliked=Object.values(S.looks).filter(L=>prefOf(L._id)<0);
+  const topItems=Object.entries(aff).filter(([k,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k])=>lookItem(k)).filter(Boolean);
+  $('#prefArea').innerHTML=`<div class="pref"><div><div class="k">내 취향 기록</div><div class="v">좋아요 <b class="mono">${liked.length}</b> · 별로 <b class="mono">${disliked.length}</b>${(S.prefs||[]).length?` · 엑셀 기록 <b class="mono">${S.prefs.length}</b>`:''}</div>${topItems.length?`<div class="s">자주 고른 옷: ${topItems.map(x=>esc(x.label)).join(', ')}</div>`:'<div class="s">코디에 좋아요/별로를 누르면 여기에 쌓여요.</div>'}${(S.prefs||[]).filter(p=>!/^[cp]:|^look-/.test(p.target)).map(p=>`<div class="s">· ${esc(p.memo)}</div>`).join('')}</div><button class="btn sm" onclick="copyPref()">취향 기록 복사</button></div>`;
+  const all=Object.values(S.looks);const isNew=L=>(L.items||[]).some(i=>{const x=i[0]==='p'?S.products[i.slice(2)]:null;return x&&x.cart});
+  const F={'날씨':L=>(L.wx||[]).includes(wxSel),'새 옷':isNew,'좋아요':L=>prefOf(L._id)>0,'전체':()=>true};
+  $('#lookChips').innerHTML=Object.keys(F).map(k=>`<button class="chip ${k===lookFilter?'on':''}" onclick="lookFilter='${k}';renderLooks()">${k==='날씨'?wxSel+' 코디':k}<sup>${all.filter(F[k]).length}</sup></button>`).join('');
+  const ls=all.filter(F[lookFilter]).map(L=>({L,s:lookScore(L).score+prefScore(L,aff)})).filter(x=>lookFilter==='좋아요'||prefOf(x.L._id)>=0||lookFilter==='전체').sort((a,b)=>b.s-a.s).map(x=>x.L);
+  $('#lookList').innerHTML=ls.length?ls.map((L,i)=>lookCard(L,`<span class="pb"><button class="${prefOf(L._id)>0?'on':''}" onclick="setPref('${esc(L._id)}',1)">좋아요</button><button class="${prefOf(L._id)<0?'on no':''}" onclick="setPref('${esc(L._id)}',-1)">별로</button></span>`,i)).join(''):`<p class="empty-note">${S.loaded?'이 조건에 맞는 코디가 아직 없어요.':'불러오는 중…'}</p>`;
 }
+loadWx();
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 /* ---------------- modal ---------------- */
@@ -679,14 +710,15 @@ function fromWorkbook(wb){
     out.products[id]={_id:id,no:no?Number(no)||no:'',src:'musinsa',brand:T(r['브랜드']),name,price,normal,dc,c1:T(r['대분류']),c2:T(r['소분류']),color:T(r['색']),material:T(r['소재']),
       measure:T(r['사이즈별 길이']),materialUrl:safeWebUrl(r['소재 출처']),
       attrs:T(r['특징']).split('|').map(T).filter(Boolean),review:N(r['리뷰수']),score:N(r['평점']),like:Y(r['좋아요']),likeRank:N(r['좋아요순위'])||null,
-      cart:(opt||qty)?{opt,qty:qty||1,addedAt:D(r['담은날']),saleEnd:D(r['세일종료'])}:null,
+      cart:(opt||qty)?{opt,qty:qty||1,addedAt:D(r['담은날']),saleEnd:D(r['세일종료']),when:T(r['구매시기']),memo:T(r['구매메모'])}:null,
       imgs:T(r['사진']).split(',').map(T).filter(Boolean),tip:T(r['코디팁']),bought:Y(r['구매함']),verdict:v,url:T(r['링크']),hist:hist.length?hist:[{d:'',p:price}]}});
   rowsOf(wb,'코디').forEach((r,i)=>{const title=T(r['제목']);if(!title)return;const id=T(r['ID'])||'look-'+(i+2);
-    out.looks[id]={_id:id,title,tag:T(r['태그']),desc:T(r['설명']),items:T(r['아이템']).split(/[,\n]/).map(T).filter(Boolean),by:T(r['만든이']),at:D(r['날짜'])}});
+    out.looks[id]={_id:id,title,tag:T(r['태그']),desc:T(r['설명']),items:T(r['아이템']).split(/[,\n]/).map(T).filter(Boolean),by:T(r['만든이']),at:D(r['날짜']),wx:T(r['날씨']).split(/[,\s]+/).map(T).filter(Boolean)}});
+  out.prefs=rowsOf(wb,'선호').map(r=>({at:D(r['날짜']),target:T(r['대상']),r:/별로|싫|-/.test(T(r['반응']))?-1:1,memo:T(r['메모'])})).filter(x=>x.target);
   return out;
 }
 function applyData(d,label){
-  S.closet=d.closet;S.products=d.products;S.looks=d.looks;
+  S.closet=d.closet;S.products=d.products;S.looks=d.looks;S.prefs=d.prefs||[];
   const drops=Object.values(d.products).map(p=>{const x=lastDrop(p);return x?{id:p._id,...x}:null}).filter(Boolean);
   S.meta={lastSync:label,changes:{added:Object.values(d.products).filter(p=>p.cart).map(p=>p._id),removed:Object.values(d.products).filter(p=>p.bought).map(p=>p._id),drops}};
   SRC=`${label} · 옷 ${Object.keys(d.closet).length}벌 · 상품 ${Object.keys(d.products).length}개 · 코디 ${Object.keys(d.looks).length}개`;
@@ -864,6 +896,12 @@ function cartMeta(p){if(!p.cart.site)return `<span class="tg">무신사 장바�
 function cartSummary(C){const sum=C.reduce((a,p)=>a+p.price*(p.cart.qty||1),0),site=C.filter(p=>p.cart.site).length;
   return `<div class="panel cartsum"><div><div class="k">담은 상품</div><div class="v">${C.length}개</div></div><div><div class="k">합계</div><div class="v">${won(sum)}</div></div><div class="empty-note">무신사 장바구니 ${C.length-site}개 · 사이트에서 담은 것 ${site}개<br>사이트 장바구니는 이 브라우저에 저장돼요. 실제 결제는 무신사에서 해요.</div></div>`}
 const ownThumbs=(arr,n=6)=>`<div class="thumbs">${arr.slice(0,n).map(c=>{const s=cImg(c);return `<button onclick="openC('${esc(c._id)}')" title="${esc(c.name)}"><i>${s?`<img loading="lazy" src="${s}" alt="">`:''}</i><b>${esc(groupOf(c))}</b></button>`}).join('')}${arr.length>n?`<span class="sub">+${arr.length-n}</span>`:''}</div>`;
+
+const whenLabel=w=>String(w||'').replace(/^\d+\s*·\s*/,'');
+function cartGroups(C){const m={};C.filter(p=>p.cart&&p.cart.when).forEach(p=>{(m[p.cart.when]=m[p.cart.when]||[]).push(p)});
+  return Object.keys(m).sort().map(k=>({key:k,label:whenLabel(k),items:m[k],sum:m[k].reduce((a,p)=>a+p.price*(p.cart.qty||1),0)}))}
+function cartTimeline(C){const g=cartGroups(C);if(!g.length)return '';
+  return `<div class="ctl"><h2>언제 살까</h2>${g.map((x,i)=>`<div class="ctl-row ${i?'':'first'}"><div class="ctl-d"><b>${esc(x.label.split(' · ')[0])}</b><span>${esc(x.label.split(' · ').slice(1).join(' · '))}</span></div><div class="ctl-i">${x.items.map(p=>`<button onclick="openP('${esc(p._id)}')" title="${esc(p.brand+' '+p.name)}"><i>${pImg(p)?`<img loading="lazy" src="${pImg(p)}" alt="">`:''}</i><span>${esc(p.brand)}</span></button>`).join('')}</div><div class="ctl-s mono">${won(x.sum)}</div></div>`).join('')}</div>`}
 
 /* 뭘 살까 탭 */
 let recoCat='전체';
